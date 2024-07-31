@@ -37,4 +37,11 @@ Here is a list
   * (a)
   * (b)
 * two
+
+***
+inline maths: $e=mc^2$
+
+display maths:
+
+$$ e^{i \pi} = -1 $$
   
