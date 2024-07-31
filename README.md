@@ -34,7 +34,7 @@ here is a table
 Here is a list
 
 * one
-* * (a)
+  * (a)
   * (b)
 * two
   
