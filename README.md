@@ -16,3 +16,15 @@ Look at our Wiki page  https://github.com/TrinityPythonC/Tron/wiki
 
 > [!NOTE]
 > This section is not complete
+
+***
+
+# section 1
+## sub section 1
+### sub sub section 1
+
+here is a table
+
+| one | two |
+|----|---|
+|three| four|
