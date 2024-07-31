@@ -11,8 +11,8 @@ todo:
 - [ ] read https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#images
 
 
-[!TIP]
+> [!TIP]
 Look at our Wiki page
 
-[!NOTE]
-This section is not complete
+> [!NOTE]
+> This section is not complete
