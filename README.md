@@ -23,6 +23,8 @@ Look at our Wiki page  https://github.com/TrinityPythonC/Tron/wiki
 ## sub section 1
 ### sub sub section 1
 
+***
+
 here is a table
 
 | one | two |
