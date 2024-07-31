@@ -12,7 +12,7 @@ todo:
 
 
 > [!TIP]
-Look at our Wiki page
+Look at our Wiki page  https://github.com/TrinityPythonC/Tron/wiki
 
 > [!NOTE]
 > This section is not complete
