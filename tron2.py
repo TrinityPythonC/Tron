@@ -1,35 +1,12 @@
 from tkinter import *
 import random
-import os
 import time
 
 mainwin = Tk(className=" TRON")
-
 mainwin.geometry("800x680")
-player1colour = "#A0A0FF"
-player2colour = "#FFA0A0"
 
-AIcolour = "#0000FF"
-
-# playground
 canvas1= Canvas(mainwin,width=800,height=600, bg = "black")
 canvas1.place(x=0,y=0)
-
-# status text box
-canvas2= Canvas(mainwin,width=798,height=78, bg = "grey")
-canvas2.place(x=0,y=600)
-
-# Print text (labels) on screen
-canvastext= Canvas(mainwin,width=784,height=64, bg = "black")
-canvastext.place(x=6,y=607)
-font1 = ("Arial",16,"bold")
-fontBIG = ("Arial",64,"bold") 
-def printscr(mytext,x,y,mycolour):
-    canvastext.create_text(x,y,text=mytext, fill=mycolour,font=font1, anchor="sw") 
-
-def printBIG(mytext,x,y,mycolour):
-    canvas1.create_text(x,y,text=mytext, fill=mycolour,font=fontBIG, anchor="sw") 
-
 
 player1alive = True
 x1 = 50 # player 1 x-location
@@ -51,11 +28,18 @@ yai = 50   # AI y-location
 dxai = 0   # AI x speed
 dyai = 1   # AI y speed
 
-def printscores():
-    printscr("Player 1 keyboard controls: w, a, s, d",10,24,player1colour)
-    printscr("Score: "+str(score1),160,49,player1colour)
-    printscr("Player 2 keyboard controls: i, j, k, l",420,24,player2colour)
-    printscr("Score: "+str(score2),560,49,player2colour)
+# Print text (labels) on screen
+canvastext= Canvas(mainwin,width=784,height=64, bg = "black")
+canvastext.place(x=6,y=607)
+font1 = ("Arial",16,"bold")
+def printscr(mytext,x,y,mycolour):
+    canvastext.create_text(x,y,text=mytext, fill=mycolour,font=font1, anchor="sw") 
+
+def printscores():  # all text gets deleted at the end of each game
+    printscr("Player 1 keyboard controls: w, a, s, d",10,24,"red")
+    printscr("Score: "+str(score1),160,49,"red")
+    printscr("Player 2 keyboard controls: i, j, k, l",420,24,"blue")
+    printscr("Score: "+str(score2),560,49,"blue")
 
 printscores()
 
@@ -64,13 +48,13 @@ def startagain():
     global player1alive, player2alive, AIalive
     global score1, score2
     if AIalive:
-            printBIG("AI wins!!!",200,200,"yellow")
+       print("AI wins!!!")
     if player1alive:
         score1 = score1 + 1
-        printBIG("Player 1 wins!!!",100,200,"yellow")
+        print("Player 1 wins!!!")
     if player2alive:
         score2 = score2 + 1
-        printBIG("Player 2 wins!!!",100,200,"yellow")
+        print("Player 2 wins!!!")
     canvastext.delete("all")
     printscores()
     canvastext.update()
@@ -91,7 +75,7 @@ def startagain():
     yai = 50   # AI y-location
     dxai = 0   # AI x speed
     dyai = 1   # AI y speed
-    canvas1.delete("all")
+    canvas1.delete("all")  # removes all text and drawings from canvas1
     cleargrid()
     drawwalls()
 
@@ -107,7 +91,6 @@ def cleargrid():
     for i in range(500):
       for j in range(500):
           grid[i][j] = 0
-
 
 def mykey(event):
     global dx1, dy1, dx2, dy2
@@ -172,7 +155,6 @@ def goclearAI():
       elif go == "up": dyai = -1
       elif go == "down": dyai = 1
     
-
 def controlAI():
     if grid[xai+dxai][yai+dyai] == 1:
         if random.randint(1,100) > 40 : # turn to avoid wall
@@ -180,8 +162,6 @@ def controlAI():
     elif random.randint(1,100) > 92: # make a random turn
         goclearAI()
         
-
-
 def drawdot(x,y,colour):
     global grid
     if colour == "black":
@@ -223,16 +203,15 @@ def timerupdate():
             explosion(xai,yai)
        AIalive = False
     if player1alive:
-       drawdot(x1,y1,player1colour)
+       drawdot(x1,y1,"red")
     if player2alive: 
-       drawdot(x2,y2,player2colour)
+       drawdot(x2,y2,"blue")
     if AIalive:  
-       drawdot(xai,yai,AIcolour)
+       drawdot(xai,yai,"yellow")
     alivecount = sum([player1alive, player2alive, AIalive])
     if alivecount <= 1:
         startagain()
     mainwin.after(100,timerupdate)
-
 
 def drawwalls():
    drawline(0,1,1,0,200,"grey")
