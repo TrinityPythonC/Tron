@@ -94,6 +94,91 @@ def drawline(x,y,dx,dy,n,colour):
 mainwin.mainloop()
 ```
 
+# Walls
+Now create the boundary with walls
+
+
+```
+from tkinter import *
+
+mainwin = Tk()
+mainwin.geometry("800x600")
+
+canvas1= Canvas(mainwin,width=800,height=600, bg = "black")
+canvas1.place(x=0,y=0)
+
+grid = []  # playfield, 500 by 500   
+for i in range(500):
+        L=[]   
+        for j in range(500):      
+           L.append(0)    
+        grid.append(L)    
+
+
+def drawdot(x,y,colour):
+        global grid
+        grid[x][y] = 1
+        canvas1.create_line(x*4,y*4,x*4+4,y*4,width=4,fill=colour)
+
+def drawline(x,y,dx,dy,n,colour):
+        for i in range(n):
+            drawdot(x+dx*i,y+dy*i,colour)
+
+# draw walls
+drawline(0,1,1,0,200,"yellow")
+drawline(199,1,0,1,150,"yellow")
+drawline(199,150,-1,0,200,"yellow")
+drawline(0,150,0,-1,150,"yellow")
+
+mainwin.mainloop()
+```
+
+
+# Player 1
+
+Lets create Player 1
+
+```
+from tkinter import *
+
+mainwin = Tk()
+mainwin.geometry("800x600")
+
+canvas1= Canvas(mainwin,width=800,height=600, bg = "black")
+canvas1.place(x=0,y=0)
+
+player1alive = True
+x1 = 50   # player 1 x-location
+y1 = 50   # player 1 y-location
+dx1 = 0   # x1 speed
+dy1 = 1   # y1 speed
+
+grid = []  # playfield, 500 by 500   
+for i in range(500):
+        L=[]   
+        for j in range(500):      
+           L.append(0)    
+        grid.append(L)    
+
+
+def drawdot(x,y,colour):
+        global grid
+        grid[x][y] = 1
+        canvas1.create_line(x*4,y*4,x*4+4,y*4,width=4,fill=colour)
+
+def drawline(x,y,dx,dy,n,colour):
+        for i in range(n):
+            drawdot(x+dx*i,y+dy*i,colour)
+
+# draw walls
+drawline(0,1,1,0,200,"yellow")
+drawline(199,1,0,1,150,"yellow")
+drawline(199,150,-1,0,200,"yellow")
+drawline(0,150,0,-1,150,"yellow")
+
+mainwin.mainloop()
+```
+
 
 
 todo:
