@@ -15,7 +15,7 @@ We use the Python built in library tkinter to display a window with graphics
 from tkinter import *
 
 mainwin = Tk()
-mainwin.geometry("800x600")
+mainwin.geometry("800x680")
 
 mainwin.mainloop()
 ```
@@ -29,7 +29,7 @@ Now add a canvas to draw on
 from tkinter import *
 
 mainwin = Tk()
-mainwin.geometry("800x600")
+mainwin.geometry("800x680")
 
 canvas1= Canvas(mainwin,width=800,height=600, bg = "black")
 canvas1.place(x=0,y=0)
@@ -45,7 +45,7 @@ Now create a grid to store the location of the dots that make up the lines. We u
 from tkinter import *
 
 mainwin = Tk()
-mainwin.geometry("800x600")
+mainwin.geometry("800x680")
 
 canvas1= Canvas(mainwin,width=800,height=600, bg = "black")
 canvas1.place(x=0,y=0)
@@ -70,7 +70,7 @@ We use the `create_line()` function to create dots and then lines are made up of
 from tkinter import *
 
 mainwin = Tk()
-mainwin.geometry("800x600")
+mainwin.geometry("800x680")
 
 canvas1= Canvas(mainwin,width=800,height=600, bg = "black")
 canvas1.place(x=0,y=0)
@@ -102,7 +102,7 @@ Now create the boundary with walls
 from tkinter import *
 
 mainwin = Tk()
-mainwin.geometry("800x600")
+mainwin.geometry("800x680")
 
 canvas1= Canvas(mainwin,width=800,height=600, bg = "black")
 canvas1.place(x=0,y=0)
@@ -142,7 +142,7 @@ Lets create Player 1
 from tkinter import *
 
 mainwin = Tk()
-mainwin.geometry("800x600")
+mainwin.geometry("800x680")
 
 canvas1= Canvas(mainwin,width=800,height=600, bg = "black")
 canvas1.place(x=0,y=0)
