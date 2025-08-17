@@ -180,6 +180,64 @@ mainwin.mainloop()
 ```
 
 
+# Keyboard Input
+
+We can easily test for keyboard input with tkinter
+
+First bind the keyboard input to a function that we call `mykey()`
+
+`mainwin.bind("<Key>", mykey)`
+
+and define the function `mkey()`
+
+```
+def mykey(event):
+       global dx1, dy1
+       if event.char == "w":
+         dy1 = -1
+         dx1 = 0
+       if event.char == "d":
+         dy1 = 0
+         dx1 = 1
+       if event.char == "a":
+         dy1 = 0
+         dx1 = -1
+       if event.char == "s":
+         dy1 = 1
+         dx1 = 0
+```
+
+# Movement!
+
+To make our player move, we use a timer that gets called every 100 milliseconds:
+
+`mainwin.after(100,timerupdate)`
+
+
+and the function `timerupdate()` looks like this
+
+
+```
+def timerupdate():
+       global x1,y1, player1alive
+       if player1alive:
+         x1 = x1 + dx1
+         y1 = y1 + dy1
+       if grid[x1][y1] == 1:  # collision with line
+          player1alive = False
+       drawdot(x1,y1,"blue")
+       mainwin.after(100,timerupdate)
+```
+
+and we call `timerupdate()` just before `mainloop()` at the end of our program
+
+```
+mainwin.after(100,timerupdate)
+mainwin.mainloop()
+```
+
+
+
 
 todo:
 - [x] make todo list
