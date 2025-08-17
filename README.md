@@ -335,8 +335,6 @@ def timerupdate():
 
 We erase the contents of the window each time we start a level, and so we need to call `printscores()` each time we start a level
 ```
-# Print text (labels) on screen
-# Print text (labels) on screen
 canvastext= Canvas(mainwin,width=784,height=64, bg = "black")
 canvastext.place(x=6,y=607)
 font1 = ("Arial",16,"bold")
@@ -354,12 +352,141 @@ printscores()
 ```
 
 
+# Robot Player (AI)
 
-todo:
-- [x] make todo list
-- [ ] fix program code indentation
-- [ ] add more pages
-- [ ] read https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#images
+First create variables for the AI player
+
+```
+AIalive = True
+xai = 100  # AI x-location
+yai = 50   # AI y-location
+dxai = 0   # AI x speed
+dyai = 1   # AI y speed
+```
+
+
+Now create a function to choose the direction for the AI player when it encounters a wall
+
+```
+def goclearAI():
+    global dxai, dyai, AIalive
+    dxai = 0
+    dyai = 0
+    godirections = []
+    if grid[xai+1][yai] == 0:
+        godirections.append("right")
+    if grid[xai-1][yai] == 0:
+        godirections.append("left")
+    if grid[xai][yai+1] == 0:
+        godirections.append("down")
+    if grid[xai][yai-1] == 0:
+        godirections.append("up")
+    if godirections == []:
+       if AIalive:
+            explosion(xai,yai)
+       AIalive = False
+    else:
+      go = random.choice(godirections)
+      if go == "right": dxai = 1
+      elif go == "left": dxai = -1
+      elif go == "up": dyai = -1
+      elif go == "down": dyai = 1
+```
+
+Here is the function to control the AI. Most of the time it does not change `dxai` and `dyai`, since the robot normally moves in a straight line. 
+If it encounters a wall then the robot changes direction about 99% of the time.
+If it does not encounter a wall then it makes a random turn about 1% of the time.
+
+```
+def controlAI():
+    if grid[xai+dxai][yai+dyai] == 1:
+        if random.randint(1,100) > 1 : # turn to avoid wall
+           goclearAI()
+    elif random.randint(1,100) > 98: # make a random turn
+        goclearAI()
+```
+
+Finally, we update the position of the robot in `timerupdate()`:
+
+```
+def timerupdate():
+    global x1,x2,y1,y2,xai,yai, player1alive, player2alive, AIalive
+    controlAI()
+...
+    if AIalive:
+      xai = xai + dxai
+      yai = yai + dyai
+    if grid[xai][yai] == 1:
+       if AIalive:
+            explosion(xai,yai)
+       AIalive = False
+    if AIalive:  
+       drawdot(xai,yai,"light green")
+```
+
+
+# Starting Again
+
+After two players have crashed, we start again by resetting all the variables:
+
+```
+def startagain():
+    global x1,y1,dx1,dy1,x2,y2,dx2,dy2,xai,yai,dxai,dyai
+    global player1alive, player2alive, AIalive
+    global score1, score2
+    if AIalive:
+            print("AI wins!!!",200,200,"yellow")
+    if player1alive:
+        score1 = score1 + 1
+        print("Player 1 wins!!!",100,200,"yellow")
+    if player2alive:
+        score2 = score2 + 1
+        print("Player 2 wins!!!",100,200,"yellow")
+    canvastext.delete("all")
+    printscores()
+    canvastext.update()
+    canvas1.update()
+    time.sleep(2)
+    player1alive = True
+    x1 = 50 
+    y1 = 50 
+    dx1 = 0 
+    dy1 = 1
+    player2alive = True
+    x2 = 150 # player 2 x-location
+    y2 = 50  # player 2 y-location
+    dx2 = 0  # player 2 x-speed
+    dy2 = 1  # player 2 y-speed
+    AIalive = True
+    xai = 100  # AI x-location
+    yai = 50   # AI y-location
+    dxai = 0   # AI x speed
+    dyai = 1   # AI y speed
+    canvas1.delete("all")
+    cleargrid()
+    drawwalls()
+```
+```
+def cleargrid():
+    global grid
+    for i in range(500):
+      for j in range(500):
+          grid[i][j] = 0
+```
+
+
+Finally, add the following code to the end of `timerupdate`:
+
+```
+def timerupdate():
+...
+    alivecount = sum([player1alive, player2alive, AIalive])
+    if alivecount <= 1:
+        startagain()
+    mainwin.after(100,timerupdate)
+
+```
+
 
 
 > [!TIP]
