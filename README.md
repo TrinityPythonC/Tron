@@ -4,6 +4,16 @@ Tron game from the 1980s
 ![Tron picture](https://github.com/TrinityPythonC/Tron/blob/main/wikifiles/wikiTron.png)
 
 
+# Getting started
+This game is programed with Python, and so you will need to install Python to run it.
+
+# tkinter
+
+We use the Python built in library tkinter to display a window with graphics
+
+
+
+
 todo:
 - [x] make todo list
 - [ ] fix program code indentation
